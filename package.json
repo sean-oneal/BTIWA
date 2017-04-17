@@ -1,0 +1,19 @@
+{
+  "name": "d",
+  "version": "1.0.0",
+  "description": "test app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sean-oneal/BTIWA.git"
+  },
+  "author": "Sean O'Neal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sean-oneal/BTIWA/issues"
+  },
+  "homepage": "https://github.com/sean-oneal/BTIWA#readme"
+}
