@@ -15,5 +15,17 @@
   "bugs": {
     "url": "https://github.com/sean-oneal/BTIWA/issues"
   },
-  "homepage": "https://github.com/sean-oneal/BTIWA#readme"
+  "homepage": "https://github.com/sean-oneal/BTIWA#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-router": "^4.1.1"
+  },
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^6.4.1",
+    "webpack": "^2.4.1"
+  }
 }
