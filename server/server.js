@@ -1,7 +1,9 @@
-var express = require('express');
-var path = require('path');
+'use strict';
 
-var app = express();
+const express = require('express');
+const path = require('path');
+
+const app = express();
 //TODO body-parser
 //
 app.use(express.static(path.join(__dirname, '../client')));
