@@ -24,6 +24,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
+    "twitter": "^1.7.0",
     "watson-developer-cloud": "^2.29.0"
   },
   "devDependencies": {
