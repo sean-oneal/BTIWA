@@ -1,4 +1,4 @@
-# React App
+# Tweet Stream
 
 ## Table of Contents
 
@@ -9,11 +9,12 @@
     1. [Installing Dependencies](#installing-dependencies)
     1. [Tasks](#tasks)
     1. [Tech Stack](#techstack)
+1. [Future](#future)
 
 ## Owner
   - [Sean O'Neal](https://github.com/sean-oneal)
 ## Usage
-
+The App is built to provide a real-time stream of tweets that pertain to a specific hashtag.
 
 ## Requirements
 - npm
@@ -70,3 +71,5 @@ This application was built using...
 - Webpack
 - Mongoose / MongoDB
 
+## Future
+Watson Tone Analyzer will allow brands to monitor sentiment of pubic tweets in real time.  D3 will provide graphs for further understanding and analysis.
