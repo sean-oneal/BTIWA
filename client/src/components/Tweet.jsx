@@ -5,9 +5,7 @@ const Tweet = (props) => {
     borderStyle: 'solid',
     color: 'grey',
   };
-
   return (
-
   <div>
       <blockquote style={style}> {props.body}
         <div>

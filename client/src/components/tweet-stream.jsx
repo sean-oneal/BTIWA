@@ -8,7 +8,7 @@ const TweetStream = ( props) => {
         {props.tweetStream.map( tweet => {
           return (
             <ul>
-            <Tweet screenName={tweet.screenName}  author={tweet.author} body={tweet.body} profileImg={tweet.profileImg} key={tweet.tweetId} />
+            <Tweet screenName={tweet.screenName} author={tweet.author} body={tweet.body} profileImg={tweet.profileImg} key={tweet.tweetId} />
             </ul>
           );
         })}
