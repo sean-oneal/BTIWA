@@ -1,8 +1,8 @@
-var mongoose = require('mongoose');
-var mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/twitter-stream';
+const mongoose = require('mongoose');
+const mongoUri = process.env.MONGOLAB_URI || 'mongodb://localhost/twitter-stream';
 
-// Connect Mongoose to our local MongoDB via URI specified above and export it below
-mongoose.connect('mongodb://localhost/twitter-stream');
+mongoose.connect(mongoUri);
+mongoose.Promise = require('bluebird');
 
 const db = mongoose.connection;
 

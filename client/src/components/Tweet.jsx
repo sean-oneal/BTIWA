@@ -1,16 +1,21 @@
 import React from 'react';
 
 const Tweet = (props) => {
+  let style = {
+    borderStyle: 'solid',
+    color: 'grey',
+  };
+
   return (
-    <div>
-      <li>
+
+  <div>
+      <blockquote style={style}> {props.body}
         <div>
-        {props.username}:
+          <img alt={props.author} src={props.profileImg} />
+          <span> {'@' + props.screenName} </span>
         </div>
-        <p>{props.message}</p>
-        <p>{props.time}</p>
-      </li>
-    </div>
+      </blockquote>
+  </div>
   );
 };
 

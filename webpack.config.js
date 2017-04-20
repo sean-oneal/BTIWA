@@ -1,20 +1,47 @@
 const webpack = require('webpack');
 const path = require('path');
 
+
 const APP_DIR = path.resolve(__dirname, 'client/src');
 const BUILD_DIR = path.resolve(__dirname, 'client/dist');
 
+// const plugins = require('webpack-load-plugins')({
+//   rename: {
+//     'html-webpack-plugin': 'Html',
+//   },
+// });
+
+// const standardPlugins = [
+//   new plugins.Html({
+//     title: 'Twit Vis',
+//     template: `${APP_DIR}/index.html`,
+//   })
+// ];
+
 const config = {
-  entry: APP_DIR + '/index.jsx',
+  entry: APP_DIR + '/components/app.jsx',
   output: {
     filename: 'bundle.js',
     path: BUILD_DIR
   },
-  node: {
-    fs: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  },
+  // node: {
+  //   fs: 'empty',
+  //   net: 'empty',
+  //   tls: 'empty'
+  // },
+  // plugins: (process.env.NODE_ENV === 'production') ? [
+  //   ...standardPlugins,
+  //   new webpack.DefinePlugin({
+  //     'process.env': {
+  //       NODE_ENV: JSON.stringify('production'),
+  //     },
+  //   }),
+  //   new webpack.optimize.UglifyJsPlugin({
+  //     compress: { warnings: false },
+  //   }),
+  // ] : [
+  //   ...standardPlugins,
+  // ],
   module: {
     loaders: [
       {
@@ -31,3 +58,5 @@ const config = {
 };
 
 module.exports = config;
+
+//TODO Look up html loader => it also appends script to load bundle.js (remove from HTML)

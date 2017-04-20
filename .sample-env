@@ -1,4 +1,5 @@
 PORT = 3000
+MONGOLAB_URI = some_uri
 WATSON_URL = api_url
 TONE_ANALYZER_USERNAME = fake_username
 TONE_ANALYZER_PASSWORD = fake_password
