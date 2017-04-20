@@ -39,7 +39,7 @@ Go to [MongoDB Installation Guide](https://docs.mongodb.com/manual/installation/
 ###Tasks
 Go to [Twitter for Developers](https://dev.twitter.com/) and follow the instructions to build a new app.
 
-Use the .sample-env file to guide you as you create a '.env' file.  Place all credentials inside.
+Use the .sample-env file to guide you as you create a '.env' file.  Place all credentials inside.  The TWITTER_BEARER_TOKEN will be automatically generated in the server when the two variables TWITTER_ACCESS_TOKEN_KEY and TWITTER_ACCESS_TOKEN_SECRET are concatenated with a colon, ":".  An example is provided in .sample-env.
 
 A default 'xbox' stream is tracked.  To change the tracked stream, go to line 48 in  '/server/server.js'.
 
