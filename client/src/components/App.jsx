@@ -1,11 +1,16 @@
 import React from 'react';
-import StreamList from './StreamList';
+import TweetStream from './TweetStream';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tweetFeed: props.feed || []
+      tweets: props.feed || [],
+      count: 0,
+      page: 0,
+      done: false,
+      skip: false,
+      updated: []
     };
   }
   componentWillMount() {
@@ -16,7 +21,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Stream of Tweets</h1>
-        <StreamList tweetFeed={this.state.tweetFeed} />
+        <TweetStream tweetsStream={this.state.tweets} />
       </div>
     );
   }

@@ -27,6 +27,7 @@
     "react-dom": "^15.5.4",
     "react-router": "^4.1.1",
     "socket.io": "^1.7.3",
+    "superagent": "^3.5.2",
     "twitter": "^1.7.0",
     "watson-developer-cloud": "^2.29.0"
   },

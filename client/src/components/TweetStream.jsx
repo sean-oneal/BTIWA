@@ -1,11 +1,11 @@
 import React from 'react';
 import Tweet from './Tweet';
 
-const StreamList = ( { tweetFeed } ) => {
+const TweetStream = ( { tweetsStream } ) => {
   return (
     <div>
       <ul>
-        {tweetFeed.tweets.map( tweet => {
+        {tweetsStream.tweets.map( tweet => {
           return (
             <Tweet username={tweet.username} message={tweet.message} time={tweet.time} key={tweet.id} />
           );
@@ -15,4 +15,4 @@ const StreamList = ( { tweetFeed } ) => {
   );
 };
 
-export default StreamList;
+export default TweetStream;
