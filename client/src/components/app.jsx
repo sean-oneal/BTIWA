@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import request from 'superagent';
 import TweetStream from './tweet-stream';
 
-
 class App extends React.Component {
   constructor(props) {
     super(props);
