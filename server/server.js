@@ -32,9 +32,10 @@ const server = http.createServer(app).listen(port, () => {
   console.log('👻  Server is running at ==> http://localhost:%s/', port);
 });
 
+
 const TWTR_BEARER_TOKEN = new Buffer(process.env.TWITTER_BEARER_TOKEN).toString('base64');
 
-const io = require('socket.io').listen(server);
+
 
 const twitterClient = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -44,10 +45,21 @@ const twitterClient = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 });
 
+const io = require('socket.io').listen(server);
+io.on('connection', socket => {
+  console.log(socket, '////////////SOCKET');
+
+  // twitterClient.stream('statuses/filter', { track: 'javascript' }, (stream) => {
+  //   streamHandler(stream, socket);
+  // });
+})
+
+
+
 //Set a stream listener for tweets matching certain keywords
-twitterClient.stream('statuses/filter', { track: 'xbox' }, (stream) => {
-  streamHandler(stream, io);
-});
+// twitterClient.stream('statuses/filter', { track: 'xbox' }, (stream) => {
+//   streamHandler(stream, io);
+// });
 
 // const ltAuthService = new watson.AuthorizationV1({
 //   username: process.env.TONE_ANALYZER_USERNAME,

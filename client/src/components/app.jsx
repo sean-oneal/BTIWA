@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import request from 'superagent';
 import TweetStream from './tweet-stream';
-
+import Search from './search';
 
 class App extends React.Component {
   constructor(props) {
@@ -39,7 +39,10 @@ class App extends React.Component {
       this.getPage(this.state.page);
     }
   }
-
+  updateHashTag(data) {
+    //fire and event to socket
+    console.log(data);
+  }
   componentDidMount() {
 
     let self = this;
@@ -54,6 +57,7 @@ class App extends React.Component {
     return (
       <div>
         <h1>Real-time Stream of Tweets</h1>
+        <Search update={ data => { this.updateHashTag(data); } } />
         <TweetStream tweetStream={this.state.tweets} />
       </div>
     );
