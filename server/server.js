@@ -15,7 +15,7 @@ const streamHandler = require('.././utils/streamHandler');
 
 const app = express();
 
-const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackDevMiddleware = require('webpack-dev-server');
 const webpack = require('webpack');
 const webpackConfig = require('../webpack.config');
 
@@ -47,11 +47,11 @@ const twitterClient = new Twitter({
 
 const io = require('socket.io').listen(server);
 io.on('connection', socket => {
-  console.log(socket, '////////////SOCKET');
+  // console.log(socket, '////////////SOCKET');
 
-  // twitterClient.stream('statuses/filter', { track: 'javascript' }, (stream) => {
-  //   streamHandler(stream, socket);
-  // });
+  twitterClient.stream('statuses/filter', { track: 'JavaScript' }, (stream) => {
+    streamHandler(stream, socket);
+  });
 })
 
 
