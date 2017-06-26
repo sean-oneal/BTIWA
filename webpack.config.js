@@ -62,6 +62,10 @@ const config = {
         include: APP_DIR,
         exclude: /node_modules/,
       },
+      {
+        test: /\.scss$/,
+        loaders: ['style', 'css', 'sass']
+      }
     ]
   },
   resolve: {
