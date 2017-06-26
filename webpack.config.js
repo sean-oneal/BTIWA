@@ -11,18 +11,6 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   filename: 'index.html',
   inject: 'body'
 });
-// const plugins = require('webpack-load-plugins')({
-//   rename: {
-//     'html-webpack-plugin': 'Html',
-//   },
-// });
-
-// const standardPlugins = [
-//   new plugins.Html({
-//     title: 'Twit Vis',
-//     template: `${APP_DIR}/index.html`,
-//   })
-// ];
 
 const config = {
   entry: APP_DIR + '/index.js',
@@ -75,5 +63,3 @@ const config = {
 };
 
 module.exports = config;
-
-//TODO Look up html loader => it also appends script to load bundle.js (remove from HTML)
