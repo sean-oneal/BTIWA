@@ -56,7 +56,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>San Francisco Tweets</h1>
+        <h1>Tweet Stream</h1>
         <Search update={ data => { this.updateHashTag(data); } } />
         <TweetStream tweetStream={this.state.tweets} />
       </div>
