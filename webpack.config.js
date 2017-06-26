@@ -25,7 +25,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 // ];
 
 const config = {
-  entry: APP_DIR + '/components/app.jsx',
+  entry: APP_DIR + '/index.js',
   output: {
     filename: 'bundle.js',
     path: BUILD_DIR

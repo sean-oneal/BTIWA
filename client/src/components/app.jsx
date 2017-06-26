@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import request from 'superagent';
+// import request from 'superagent';
 import TweetStream from './tweet-stream';
 import Search from './search';
 
@@ -64,7 +64,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
-
-
-
+export default App;
