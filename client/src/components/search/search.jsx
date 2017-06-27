@@ -1,4 +1,5 @@
 import React from 'react';
+import './styles.scss';
 
 class Search extends React.Component {
   constructor(props) {
@@ -21,10 +22,11 @@ class Search extends React.Component {
   render() {
 
     return (
-      <div>
+      <div className="search">
       <input value={this.state.text}
-        onChange={(event) => this.onInput(event.target.value)}
+        onChange={event => this.onInput(event.target.value)}
       />{this.state.text} <button onClick={event => { this.onSubmit(event); }}>Search</button>
+      <p>"searching" {this.state.text}</p>
       </div>
     );
   }

@@ -1,13 +1,10 @@
 import React from 'react';
+import './styles.scss';
 
 const Tweet = (props) => {
-  let style = {
-    borderStyle: 'solid',
-    color: 'grey',
-  };
   return (
   <div>
-      <blockquote style={style}> {props.body}
+      <blockquote> {props.body}
         <div>
           <img alt={props.author} src={props.profileImg} />
           <span> {'@' + props.screenName} </span>

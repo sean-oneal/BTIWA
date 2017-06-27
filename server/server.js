@@ -1,41 +1,46 @@
 /* eslint-disable*/
 'use strict';
 
+
 const express = require('express');
-
-const path = require('path');
 const http = require('http');
+const bodyParser = require('body-parser');
+const path = require('path');
+const socketIo = require('socket.io');
 const dotenv = require('dotenv');
-// const watson = require('watson-developer-cloud');
-const Twitter = require('twitter');
-const db = require('./db');
-const routes = require('./routes');
-
-const streamHandler = require('.././utils/streamHandler');
-
-const app = express();
-
-const webpackDevMiddleware = require('webpack-dev-server');
-const webpack = require('webpack');
-const webpackConfig = require('../webpack.config');
-
-const compiler = webpack(webpackConfig);
-
-app.use(express.static(path.join(__dirname, '../client')));
 
 //load environment properties from a .env file
 dotenv.load({silent: true});
 
-const port = process.env.PORT || 8080;
+const Twitter = require('twitter');
 
-const server = http.createServer(app).listen(port, () => {
-  console.log('👻  Server is running at ==> http://localhost:%s/', port);
+//webpack config
+const webpack = require('webpack');
+const webpackDevMiddleware = require('webpack-dev-middleware');
+const webpackConfig = require('../webpack.config');
+
+//Backend config
+const db = require('./db');
+const routes = require('./routes');
+const streamHandler = require('.././utils/streamHandler');
+const port = process.env.PORT;
+//Start Express server
+const app = express();
+
+app.use(express.static(path.join(__dirname, '../client')));
+
+app.use(webpackDevMiddleware(webpack(webpackConfig)));
+app.use(bodyParser.urlencoded({ extended: false }));
+
+const server = http.createServer(app);
+const io = socketIo(server);
+
+server .listen(port, () => {
+  console.log('\n 👻  Server is running at ==> http://localhost:%s/', port);
 });
 
-
+//TWITTER API KEYS
 const TWTR_BEARER_TOKEN = new Buffer(process.env.TWITTER_BEARER_TOKEN).toString('base64');
-
-
 
 const twitterClient = new Twitter({
   consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -45,15 +50,33 @@ const twitterClient = new Twitter({
   access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 });
 
-const io = require('socket.io').listen(server);
+let params = {track:'Javascript', lang: 'en'};
+
 io.on('connection', socket => {
-  // console.log(socket, '////////////SOCKET');
 
-  twitterClient.stream('statuses/filter', { track: 'JavaScript' }, (stream) => {
-    streamHandler(stream, socket);
+   socket.on('connection', () =>{
+
+      twitterClient.stream('statuses/filter', params, (stream) => {
+        streamHandler(stream, socket);
+      });
+      stream.stop();
   });
-})
 
+
+  socket.on('updateTopic', data => {
+    // console.log('UPDATING TOPIC', data);
+    let params = {track: data.topic, lang: 'en'};
+
+    twitterClient.stream('statuses/filter', params, (stream) => {
+        console.log('UPDATING TOPIC', data);
+        streamHandler(stream, socket);
+    });
+  })
+
+  socket.on('disconnect', () => {
+    console.log('user disconnected');
+  })
+})
 
 
 //Set a stream listener for tweets matching certain keywords
@@ -61,6 +84,8 @@ io.on('connection', socket => {
 //   streamHandler(stream, io);
 // });
 
+//IBM BLUEMATRIX API KEYS
+// const watson = require('watson-developer-cloud');
 // const ltAuthService = new watson.AuthorizationV1({
 //   username: process.env.TONE_ANALYZER_USERNAME,
 //   password: process.env.TONE_ANALYZER_PASSWORD,

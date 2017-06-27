@@ -1,0 +1,16 @@
+body {
+  color: black;
+  font-family: 'Noto Sans', sans-serif;
+}
+h1 {
+  position: relative;
+  font-family: 'Noto Sans', sans-serif;
+}
+
+input {
+  padding: 5px;
+}
+
+button {
+  padding: 5px;
+}

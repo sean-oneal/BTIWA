@@ -2,64 +2,61 @@ const webpack = require('webpack');
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const APP_DIR = path.resolve(__dirname, 'client/src');
 const BUILD_DIR = path.resolve(__dirname, 'client/dist');
+const MODULES_DIR = path.resolve(__dirname, 'node_modules');
 
-const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
+
+const HTMLWebpackConfigPlugin = new HtmlWebpackPlugin({
   template: './client/src/index.html',
   filename: 'index.html',
   inject: 'body'
 });
 
+const extractSass = new ExtractTextPlugin({
+  filename: 'styles.css',
+  disable: process.env.NODE_ENV === 'development',
+});
+
 const config = {
+  // devtool: 'source-map',
   entry: APP_DIR + '/index.js',
   output: {
     filename: 'bundle.js',
-    path: BUILD_DIR
+    path: BUILD_DIR,
+    publicPath: '/' //TODO: reseatch
   },
   // node: {
   //   fs: 'empty',
   //   net: 'empty',
   //   tls: 'empty'
   // },
-  // plugins: (process.env.NODE_ENV === 'production') ? [
-  //   ...standardPlugins,
-  //   new webpack.DefinePlugin({
-  //     'process.env': {
-  //       NODE_ENV: JSON.stringify('production'),
-  //     },
-  //   }),
-  //   new webpack.optimize.UglifyJsPlugin({
-  //     compress: { warnings: false },
-  //   }),
-  // ] : [
-  //   ...standardPlugins,
-  // ],
   module: {
     loaders: [
       {
         test: /\.js$/,
         loader: 'babel-loader',
         include: APP_DIR,
-        exclude: /node_modules/,
+        exclude: MODULES_DIR,
       },
       {
         test: /\.jsx$/,
         loader: 'babel-loader',
         include: APP_DIR,
-        exclude: /node_modules/,
+        exclude: MODULES_DIR,
       },
       {
-        test: /\.scss$/,
-        loaders: ['style', 'css', 'sass']
-      }
+        test: /\.s?css$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader']
+      },
     ]
   },
   resolve: {
     extensions: ['*', '.js', '.jsx']
   },
-  plugins: [HtmlWebpackPluginConfig]
+  plugins: [ HTMLWebpackConfigPlugin, extractSass ]
 };
 
 module.exports = config;

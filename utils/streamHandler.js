@@ -10,7 +10,7 @@ const streamHandler = (stream, io) => {
       author: event.user.name,
       profileImg: event.user.profile_image_url_https,
       body: event.text,
-      data: event.created_at,
+      date: event.created_at,
       screenName: event.user.screen_name,
     };
 

@@ -1,10 +1,11 @@
 import React from 'react';
-import Tweet from './tweet';
+import Tweet from '../tweet/tweet';
+import './styles.scss';
 
 const TweetStream = ( props) => {
   return (
     <div>
-        <ul>
+        <ul className="stream">
         {props.tweetStream.map( tweet => {
           return (
             <ul>
