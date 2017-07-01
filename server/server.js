@@ -44,7 +44,7 @@ app.disable('etag');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(webpackDevMiddleware(webpack(webpackConfig)));
 
-app.use(express.static(path.join(__dirname, '../client')));
+app.use(express.static(path.join(__dirname, '../dist')));
 
 
 const server = http.createServer(app);
@@ -110,6 +110,6 @@ io.on('connection', socket => {
 
 
 app.use('/', (req, res) => {
-  return res.sendFile(path.join(__dirname, '../client/src/index.html'));
+  return res.sendFile(path.join(__dirname, '../client/dist/index.html'));
 });
 
