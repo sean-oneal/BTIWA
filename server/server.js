@@ -1,18 +1,29 @@
 /* eslint-disable*/
 'use strict';
 
+const dotenv = require('dotenv');
+//load environment properties from a .env file
+dotenv.load({silent: true});
+
+//Twitter API
+const Twitter = require('twitter');
+//TWITTER API KEYS
+const TWTR_BEARER_TOKEN = new Buffer(process.env.TWITTER_BEARER_TOKEN).toString('base64');
+const twitterClient = new Twitter({
+  consumer_key: process.env.TWITTER_CONSUMER_KEY,
+  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
+  bearer_token: process.env.TWTR_BEARER_TOKEN,
+  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
+  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
+});
+
+const port = process.env.PORT;
 
 const express = require('express');
 const http = require('http');
 const bodyParser = require('body-parser');
 const path = require('path');
 const socketIo = require('socket.io');
-const dotenv = require('dotenv');
-
-//load environment properties from a .env file
-dotenv.load({silent: true});
-
-const Twitter = require('twitter');
 
 //webpack config
 const webpack = require('webpack');
@@ -22,8 +33,8 @@ const webpackConfig = require('../webpack.config');
 //Backend config
 const db = require('./db');
 const routes = require('./routes');
-const streamHandler = require('.././utils/streamHandler');
-const port = process.env.PORT;
+const streamHandler = require('../utils/streamHandler');
+
 //Start Express server
 const app = express();
 
@@ -37,17 +48,6 @@ const io = socketIo(server);
 
 server .listen(port, () => {
   console.log('\n 👻  Server is running at ==> http://localhost:%s/', port);
-});
-
-//TWITTER API KEYS
-const TWTR_BEARER_TOKEN = new Buffer(process.env.TWITTER_BEARER_TOKEN).toString('base64');
-
-const twitterClient = new Twitter({
-  consumer_key: process.env.TWITTER_CONSUMER_KEY,
-  consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-  bearer_token: process.env.TWTR_BEARER_TOKEN,
-  access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
-  access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
 });
 
 let params = {track:'Javascript', lang: 'en'};
