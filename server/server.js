@@ -59,15 +59,14 @@ const io = socketIo(server);
 io.on('connection', socket => {
 
    socket.on('connection', () =>{
-
       twitterClient.stream('statuses/filter', params, (stream) => {
         streamHandler(stream, socket);
       });
-      stream.stop();
+
   });
 
   socket.on('updateTopic', data => {
-    // console.log('UPDATING TOPIC', data);
+
     params.track = data.topic;
 
     twitterClient.stream('statuses/filter', params, (stream) => {
