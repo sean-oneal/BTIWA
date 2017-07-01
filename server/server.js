@@ -38,10 +38,14 @@ const streamHandler = require('../utils/streamHandler');
 //Start Express server
 const app = express();
 
+// Disable etag headers on responses
+app.disable('etag');
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(webpackDevMiddleware(webpack(webpackConfig)));
+
 app.use(express.static(path.join(__dirname, '../client')));
 
-app.use(webpackDevMiddleware(webpack(webpackConfig)));
-app.use(bodyParser.urlencoded({ extended: false }));
 
 const server = http.createServer(app);
 const io = socketIo(server);
