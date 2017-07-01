@@ -10,7 +10,7 @@ const MODULES_DIR = path.resolve(__dirname, 'node_modules');
 
 
 const HTMLWebpackConfigPlugin = new HtmlWebpackPlugin({
-  template: './client/src/index.html',
+  template: APP_DIR + '/index.html',
   filename: 'index.html',
   inject: 'body'
 });
@@ -26,7 +26,7 @@ const config = {
   output: {
     filename: 'bundle.js',
     path: BUILD_DIR,
-    publicPath: '/' //TODO: reseatch
+    //publicPath: '/' //TODO: reseatch
   },
   // node: {
   //   fs: 'empty',
