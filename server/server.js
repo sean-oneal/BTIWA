@@ -68,10 +68,10 @@ io.on('connection', socket => {
 
   socket.on('updateTopic', data => {
     // console.log('UPDATING TOPIC', data);
-    let params = {track: data.topic, lang: 'en'};
+    params.track = data.topic;
 
     twitterClient.stream('statuses/filter', params, (stream) => {
-        console.log('UPDATING TOPIC', data);
+        console.log('UPDATING TOPIC', params);
         streamHandler(stream, socket);
     });
   })
