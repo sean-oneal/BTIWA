@@ -46,15 +46,15 @@ app.use(webpackDevMiddleware(webpack(webpackConfig)));
 
 app.use(express.static(path.join(__dirname, '../dist')));
 
-
 const server = http.createServer(app);
-const io = socketIo(server);
 
 server .listen(port, () => {
   console.log('\n 👻  Server is running at ==> http://localhost:%s/', port);
 });
 
 let params = {track:'Javascript', lang: 'en'};
+
+const io = socketIo(server);
 
 io.on('connection', socket => {
 
@@ -65,7 +65,6 @@ io.on('connection', socket => {
       });
       stream.stop();
   });
-
 
   socket.on('updateTopic', data => {
     // console.log('UPDATING TOPIC', data);
