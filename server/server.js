@@ -52,7 +52,7 @@ server .listen(port, () => {
   console.log('\n 👻  Server is running at ==> http://localhost:%s/', port);
 });
 
-let params = {track:'Javascript', lang: 'en'};
+let params = {track:'san francisco', lang: 'en'};
 
 const io = socketIo(server);
 

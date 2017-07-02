@@ -1,3 +1,25 @@
-.stream {
-  color: black;
+.tweet-stream {
+   display: -webkit-flex;
+   display: flex;
+   -webkit-flex-direction: column;
+   flex-direction: column;
+   -webkit-align-items: center;
+   align-items: center;
+   -webkit-justify-content: center;
+   justify-content: center;
+   flex-basis: 10%;
+   padding: 10px;
+   margin: 20px;
+}
+
+.tweet-list-item {
+  display: -webkit-flex;
+  display: flex;
+  justify-content: space-around;
+  flex-basis: 0 1 1;
+  border: solid black 10px;
+  border-radius: 35px;
+  min-width: 5px;
+  padding: 0.5em;
+  margin: 5px;
 }

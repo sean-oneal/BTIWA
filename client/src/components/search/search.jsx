@@ -22,10 +22,10 @@ class Search extends React.Component {
   render() {
 
     return (
-      <div className="search">
+      <div className="search-container">
       <input value={this.state.text}
         onChange={event => this.onInput(event.target.value)}
-      />{this.state.text} <button onClick={event => { this.onSubmit(event); }}>Search</button>
+      />{this.state.text} <button className="search-btn" onClick={event => { this.onSubmit(event); }}>Search</button>
       <p>"searching" {this.state.text}</p>
       </div>
     );
