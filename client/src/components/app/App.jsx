@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
 import io from 'socket.io-client';
-import Search from '../search/search';
-import TweetStream from '../tweet-stream/tweet-stream';
+import Search from '../search/Search';
+import TweetStream from '../tweet-stream/Tweet-Stream';
 import './styles.scss';
 
 class App extends React.Component {
