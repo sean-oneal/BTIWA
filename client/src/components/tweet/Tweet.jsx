@@ -1,13 +1,13 @@
 import React from 'react';
 import './styles.scss';
 
-const Tweet = (props) => {
+const Tweet = ({ author, body, profileImg, screenName }) => {
   return (
-  <div className="tweet-content">
-      <div className="tweet-body"> {props.body}
-        <div className="user">
-          <img className="user-image" alt={props.author} src={props.profileImg} />
-          <span className="user-handle"> {'@' + props.screenName} </span>
+  <div className="tweet">
+      <div className="tweet-body"> {body}
+        <div className="user-profile">
+          <img className="user-image" alt={author} src={profileImg} />
+          <p className="user-name"> {'@' + screenName} </p>
         </div>
       </div>
   </div>

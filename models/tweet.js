@@ -11,30 +11,27 @@ const tweetSchema = new Schema({
   screenName: String,
 });
 
+// const Tweet = mongoose.model('Tweet', tweetSchema);
+
 tweetSchema.statics.getTweets = (page, skip, callback) => {
-  let tweets = [];
+  let dbTweets = [];
   let start = (page * 10) + (skip * 1);
 
   // Query mongoose database => use skip & limit to achieve page chunks
-  Tweet.find(
-      {},
-      'tweetId active author profileImg body date screenName',
-      { skip: start, limit: 10 }
-    )
+  Tweet.find({}, 'tweetId active author profileImg body date screenName',
+      { skip: start, limit: 10 })
     .sort({ date: 'desc' })
     .exec( (err, docs) => {
       if (!err) {
-        tweets = docs;
-        tweets.forEach( tweet => {
+        dbTweets = docs;
+        dbTweets.forEach( tweet => {
           tweet.active = true;
         });
       }
 
-      callback(tweets);
+      callback(dbTweets);
     });
 };
-
-
 const Tweet = mongoose.model('Tweet', tweetSchema);
 
 module.exports = Tweet;

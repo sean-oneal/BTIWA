@@ -9,14 +9,13 @@ const routes = {
   index: (req, res) => {
     // Fetch tweets from the database
     Tweet.getTweets(0, 0, (tweets, pages) => {
-      // console.log('fetching!', tweets, pages);
       res.send(tweets);
     });
   },
 
   page: (req, res) => {
-    // Fetch certain page of tweets from the database
-    Tweet.getTweets(req.params.page, req.params.skip, (tweets) => {
+    console.log('requst received', req);
+    Tweet.getTweets(req.params.page, req.params.skip, tweets => {
       res.send(tweets);
     });
   }

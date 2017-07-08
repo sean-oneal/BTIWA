@@ -41,7 +41,10 @@ const app = express();
 // Disable etag headers on responses
 app.disable('etag');
 
-app.use(bodyParser.urlencoded({ extended: false }));
+app.get('/api/tweets', routes.index);
+app.get('/api/page/:page/:skip', routes.page);
+
+// app.use(bodyParser.urlencoded({ extended: false }));
 app.use(webpackDevMiddleware(webpack(webpackConfig)));
 
 app.use(express.static(path.join(__dirname, '../dist')));
@@ -52,29 +55,22 @@ server .listen(port, () => {
   console.log('\n 👻  Server is running at ==> http://localhost:%s/', port);
 });
 
-let params = {track:'san francisco', lang: 'en'};
+let params = {track:'Tesla', lang: 'en'};
 
 const io = socketIo(server);
 
 io.on('connection', socket => {
-
-   socket.on('connection', () =>{
-      twitterClient.stream('statuses/filter', params, (stream) => {
+   socket.on('connection', () => {
+      twitterClient.stream('statuses/filter', params, stream => {
         streamHandler(stream, socket);
       });
-
   });
-
   socket.on('updateTopic', data => {
-
     params.track = data.topic;
-
-    twitterClient.stream('statuses/filter', params, (stream) => {
-        console.log('UPDATING TOPIC', params);
+    twitterClient.stream('statuses/filter', params, stream => {
         streamHandler(stream, socket);
     });
   })
-
   socket.on('disconnect', () => {
     console.log('user disconnected');
   })
@@ -107,7 +103,7 @@ io.on('connection', socket => {
 // app.get('/page/:page/:skip', routes.page);
 
 
-app.use('/', (req, res) => {
-  return res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-});
+// app.use('/#top', (req, res) => {
+//   return res.sendFile(path.join(__dirname, '../client/dist/index.html'));
+// });
 
