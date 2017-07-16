@@ -24,7 +24,6 @@ The App is built to provide a real-time stream of tweets that pertain to a speci
 
 ## Development
 
-
 ### Installing Dependencies
 
 Install NPM modules in the **root** directory
@@ -48,11 +47,13 @@ Start the Express server. With this command, Webpack is configured to automatica
 ```sh
 npm start
 ```
+
 Run mongod
 
 ```sh
 mongod
 ```
+
 The default server will be running on [localhost:8080](localhost:8080)
 
 Refresh the browser to see changes appear.
