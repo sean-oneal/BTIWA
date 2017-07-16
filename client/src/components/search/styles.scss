@@ -5,12 +5,22 @@
   -webkit-justify-content: center;
   justify-content: center;
 }
+.search {
+   position: relative;
+  display: flex;
 
+  align-items: center;
+
+  width: 100%;
+}
 .search input {
   align-items: center;
   padding: 15px 32px;
   flex: 0 0 auto;
   font-size: 13px;
+  flex-shrink: 1;
+  border: 1px solid grey;
+  width: 100%;
 }
 
 .search-btn {

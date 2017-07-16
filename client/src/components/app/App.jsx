@@ -146,10 +146,11 @@ class App extends React.Component {
     return (
       <div className='flex-container'>
         <NotificationBar count={this.state.count} onShowNewTweets={ this.showNewTweets}/>
-        <h3> {`Tracking: ${this.state.trackingKW}`}</h3>
+        <h2 className='title'> Tweet stream</h2>
         <Search topic={this.state.trackingKW} update={ data => { this.updateHashTag(data); } } />
-        <TweetStream tweetStream={this.state.tweets} />
+        <h3 className='tracking'> {`Tracking: ${this.state.trackingKW}`}</h3>
         <Loader paging={this.state.paging} />
+        <TweetStream tweetStream={this.state.tweets} />
       </div>
     );
   }
