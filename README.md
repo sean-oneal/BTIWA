@@ -17,7 +17,10 @@
   - [Sean O'Neal](https://github.com/sean-oneal)
 
 ## Usage
-This application is built to provide a real-time stream of tweets that pertain to a specific hashtag.
+This application is built to provide a real-time stream of tweets that pertain to a specific hashtag.  The application features CSS Flexbox, infinity scroll and a custom loader.
+
+<img src="readme/infintyScroll.png" alt="Tweet Stream Infinity Scroll" height=400 />
+<img src="readme/loader.png" alt="Tweet Stream Loader" height=400 />
 
 ## Requirements
 - Node
