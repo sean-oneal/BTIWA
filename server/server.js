@@ -17,7 +17,7 @@ const twitterClient = new Twitter({
 });
 const TWTR_BEARER_TOKEN = new Buffer(process.env.TWITTER_BEARER_TOKEN).toString('base64');
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 const express = require('express');
 const http = require('http');

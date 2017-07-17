@@ -1,5 +1,7 @@
 # Tweet Stream
 
+<img src="readme/mockup.png" alt="Tweet Stream Mockup" height=600 />
+
 ## Table of Contents
 
 1. [Owner](#owner)
@@ -8,19 +10,19 @@
 1. [Development](#development)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Tasks](#tasks)
-    1. [Tech Stack](#techstack)
+    1. [Tech Stack](#tech-stack)
 1. [Future](#future)
 
 ## Owner
   - [Sean O'Neal](https://github.com/sean-oneal)
+
 ## Usage
-The App is built to provide a real-time stream of tweets that pertain to a specific hashtag.
+This application is built to provide a real-time stream of tweets that pertain to a specific hashtag.
 
 ## Requirements
-- npm
 - Node
 - MongoDB
-- Twitter API Credentials
+- Twitter API Keys
 
 ## Development
 
@@ -32,33 +34,32 @@ Install NPM modules in the **root** directory
 npm install
 ```
 
+Go to [Twitter for Developers](https://dev.twitter.com/) and follow the instructions on how to build a new app so that you will have the necessary API Keys to start the application.  After you have the required Twitter API Keys, create a '.env' file in the root directory and place them inside. An example of how this should look can be found in the '.sample-env' file.
+
 Install MongoDB to local environment
 Go to [MongoDB Installation Guide](https://docs.mongodb.com/manual/installation/)
 
-###Tasks
-Go to [Twitter for Developers](https://dev.twitter.com/) and follow the instructions to build a new app.
+### Tasks
 
-Use the .sample-env file to guide you as you create a '.env' file.  Place all credentials inside.  The TWITTER_BEARER_TOKEN will be automatically generated in the server when the two variables TWITTER_ACCESS_TOKEN_KEY and TWITTER_ACCESS_TOKEN_SECRET are concatenated with a colon, ":".  An example is provided in .sample-env.
-
-A default 'xbox' stream is tracked.  To change the tracked stream, go to line 48 in  '/server/server.js'.
-
-Start the Express server. With this command, Webpack is configured to automatically watch files.
+Start the Express server and tell Webpack to watch files:
 
 ```sh
 npm start
 ```
 
-Run mongod
+Start 'mongod' in another Terminal window or tab:
+
 
 ```sh
 mongod
 ```
 
-The default server will be running on [localhost:8080](localhost:8080)
+The default server will be running on [localhost:3000](localhost:3000).  To override the default Port, include a custom 'PORT' setting to the '.env' file.
 
 Refresh the browser to see changes appear.
 
-To Drop the Database
+To Drop the Database:
+
 ```sh
 npm run dropDb
 ```
@@ -69,8 +70,10 @@ This application was built using...
 - React
 - Express
 - Socket.io
-- Webpack
 - Mongoose / MongoDB
+- Webpack
 
 ## Future
-Watson Tone Analyzer will allow brands to monitor sentiment of pubic tweets in real time.  D3 will provide graphs for further understanding and analysis.
+- Sentiment analysis of Tweets
+- D3 graphs for additional insights and analysis
+- Historical analysis of tweets over time

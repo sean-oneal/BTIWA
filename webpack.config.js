@@ -26,7 +26,7 @@ const config = {
   output: {
     filename: 'bundle.js',
     path: BUILD_DIR,
-    //publicPath: '/' //TODO: reseatch
+    //publicPath: '/'
   },
   // node: {
   //   fs: 'empty',
