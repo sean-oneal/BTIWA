@@ -121,7 +121,7 @@ class App extends React.Component {
     this.socket.emit('updateTopic', {topic: data});
   }
 
-  componentWillMount() {
+  componentDidMount() {
     request.get('/api/tweets').end( (err, res) => {
       if (!err) {
         this.setState({
