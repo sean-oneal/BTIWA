@@ -116,7 +116,9 @@ class App extends React.Component {
     this.setState({
       tweets: [],
       trackingKW: data,
-      paging: true
+      paging: true,
+      count: 0,
+      skip: 0
     });
     this.socket.emit('updateTopic', {topic: data});
   }
@@ -126,12 +128,14 @@ class App extends React.Component {
       if (!err) {
         this.setState({
           tweets: res.body,
-          paging: true
+          paging: false,
+          skip: res.body.length
         });
       } else {
         console.log(err, 'error occured');
       }
     });
+    window.addEventListener('scroll', this.checkWindowScroll);
   }
 
   componentWillMount() {
@@ -142,11 +146,23 @@ class App extends React.Component {
     window.addEventListener('scroll', this.checkWindowScroll);
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.checkWindowScroll);
+  }
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.tweets.length || this.state.tweets.length !== nextProps.length) {
+      this.setState({
+        trackingKW: nextProps.trackingKW,
+        paging: true,
+        count: 0
+      });
+    }
+  }
   render() {
     return (
       <div className='flex-container'>
-        <NotificationBar count={this.state.count} onShowNewTweets={ this.showNewTweets}/>
-        <h2 className='title'> Tweet stream</h2>
+        <NotificationBar count={this.state.count} showNewTweets={ this.showNewTweets}/>
+        <h2 className='title'> Tweet Stream</h2>
         <Search topic={this.state.trackingKW} update={ data => { this.updateHashTag(data); } } />
         <h3 className='tracking'> {`Tracking: ${this.state.trackingKW}`}</h3>
         <Loader paging={this.state.paging} />

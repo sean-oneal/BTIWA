@@ -1,11 +1,11 @@
 import React from 'react';
 import './styles.scss';
 
-const NotificationBar = ( {count, onShowNewTweets } ) => {
+const NotificationBar = ( {count, showNewTweets } ) => {
   return (
-  <div className={ 'notification-bar' + ( count > 0 ? ' active' : '' ) }>
+  <div className={ 'notification-bar' + ( count > 3 ? ' active' : '' ) }>
         <p>{`There are ${count} new tweets!`}
-          <a href="#top" onClick={onShowNewTweets}> Update Tweets</a>
+          <a href="#top" onClick={showNewTweets}> Update Tweets</a>
         </p>
   </div>
   );
