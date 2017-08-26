@@ -8,7 +8,6 @@ import TweetStream from '../tweetStream/TweetStream';
 import './styles.scss';
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -18,7 +17,7 @@ class App extends React.Component {
       page: 0,
       paging: false,
       skip: 0,
-      done: false,
+      done: false
     };
     this.checkWindowScroll = this.checkWindowScroll.bind(this);
     this.loadPagedTweets = this.loadPagedTweets.bind(this);
@@ -41,34 +40,32 @@ class App extends React.Component {
 
   getPage(page) {
     // Setup our superagent request to get pages
-    request
-      .get('/api/page/' + page + '/' + this.state.skip)
-      .end( (err, res) => {
-        if (!err) {
-          if (request.status >= 200 && request.status < 400) {
-            // Load our next page
-            this.loadPagedTweets(res.body);
-          } else {
-          // Set application state (Not paging, paging complete)
-            this.setState({
-              paging: false,
-              done: true
-            });
-          }
+    request.get('/api/page/' + page + '/' + this.state.skip).end((err, res) => {
+      if (!err) {
+        if (request.status >= 200 && request.status < 400) {
+          // Load our next page
+          this.loadPagedTweets(res.body);
         } else {
+          // Set application state (Not paging, paging complete)
           this.setState({
-            done: false,
-            paging: true
+            paging: false,
+            done: true
           });
-          console.log(err, 'ERRRRRR');
         }
-      });
+      } else {
+        this.setState({
+          done: false,
+          paging: true
+        });
+        console.log(err, 'ERRRRRR');
+      }
+    });
   }
 
   showNewTweets() {
     let updated = this.state.tweets;
 
-    updated.forEach( tweet => {
+    updated.forEach(tweet => {
       tweet.active = true;
     });
 
@@ -76,16 +73,15 @@ class App extends React.Component {
       tweets: updated,
       count: 0
     });
-
   }
 
-  loadPagedTweets (tweets) {
+  loadPagedTweets(tweets) {
     if (tweets.length > 0) {
       let updated = this.state.tweets;
-      tweets.forEach( (tweet) => {
+      tweets.forEach(tweet => {
         updated.push(tweet);
       });
-      setTimeout( () => {
+      setTimeout(() => {
         this.setState({
           tweets: updated,
           paging: false
@@ -101,9 +97,12 @@ class App extends React.Component {
   }
 
   checkWindowScroll() {
-    let h = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
-    let s = (document.body.scrollTop || document.documentElement.scrollTop || 0 );
-    let scrolled = (h + s) > document.body.offsetHeight;
+    let h = Math.max(
+      document.documentElement.clientHeight,
+      window.innerHeight || 0
+    );
+    let s = document.body.scrollTop || document.documentElement.scrollTop || 0;
+    let scrolled = h + s > document.body.offsetHeight;
 
     if (scrolled && !this.state.paging && !this.state.done) {
       this.setState({ paging: true, page: this.state.page + 1 });
@@ -120,11 +119,11 @@ class App extends React.Component {
       count: 0,
       skip: 0
     });
-    this.socket.emit('updateTopic', {topic: data});
+    this.socket.emit('updateTopic', { topic: data });
   }
 
-  componentDidMount() {
-    request.get('/api/tweets').end( (err, res) => {
+  componentWillMount() {
+    request.get('/api/tweets').end((err, res) => {
       if (!err) {
         this.setState({
           tweets: res.body,
@@ -138,7 +137,7 @@ class App extends React.Component {
     window.addEventListener('scroll', this.checkWindowScroll);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.socket = io.connect('/').emit('connection');
     this.socket.on('tweet', data => {
       this.addTweet(data);
@@ -150,7 +149,10 @@ class App extends React.Component {
     window.removeEventListener('scroll', this.checkWindowScroll);
   }
   componentWillReceiveProps(nextProps) {
-    if (!nextProps.tweets.length || this.state.tweets.length !== nextProps.length) {
+    if (
+      !nextProps.tweets.length ||
+      this.state.tweets.length !== nextProps.length
+    ) {
       this.setState({
         trackingKW: nextProps.trackingKW,
         paging: true,
@@ -160,11 +162,21 @@ class App extends React.Component {
   }
   render() {
     return (
-      <div className='flex-container'>
-        <NotificationBar count={this.state.count} showNewTweets={ this.showNewTweets}/>
-        <h2 className='title'> Tweet Stream</h2>
-        <Search topic={this.state.trackingKW} update={ data => { this.updateHashTag(data); } } />
-        <h3 className='tracking'> {`Tracking: ${this.state.trackingKW}`}</h3>
+      <div className="flex-container">
+        <NotificationBar
+          count={this.state.count}
+          showNewTweets={this.showNewTweets}
+        />
+        <h2 className="title"> Tweet Stream</h2>
+        <Search
+          topic={this.state.trackingKW}
+          update={data => {
+            this.updateHashTag(data);
+          }}
+        />
+        <h3 className="tracking">
+          {' '}{`Tracking: ${this.state.trackingKW}`}
+        </h3>
         <Loader paging={this.state.paging} />
         <TweetStream tweetStream={this.state.tweets} />
       </div>
