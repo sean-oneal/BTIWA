@@ -11,17 +11,20 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      trackingKW: '' || 'Tesla',
+      trackingKW: '' || 'San Francisco',
       tweets: [],
-      count: 0,
       page: 0,
-      paging: false,
+      count: 0,
       skip: 0,
+      paging: false,
       done: false
     };
     this.checkWindowScroll = this.checkWindowScroll.bind(this);
     this.loadPagedTweets = this.loadPagedTweets.bind(this);
     this.showNewTweets = this.showNewTweets.bind(this);
+    this.getPage = this.getPage.bind(this);
+    this.addTweet = this.addTweet.bind(this);
+    this.updateHashTag = this.updateHashTag.bind(this);
   }
 
   addTweet(data) {
@@ -33,29 +36,19 @@ class App extends React.Component {
     this.setState({
       tweets: updated,
       count: newCount,
-      skip: newSkip,
-      paging: false
+      skip: newSkip
     });
   }
 
   getPage(page) {
     // Setup our superagent request to get pages
     request.get('/api/page/' + page + '/' + this.state.skip).end((err, res) => {
-      if (!err) {
-        if (request.status >= 200 && request.status < 400) {
-          // Load our next page
-          this.loadPagedTweets(res.body);
-        } else {
-          // Set application state (Not paging, paging complete)
-          this.setState({
-            paging: false,
-            done: true
-          });
-        }
+      if (!err && res.status >= 200 && res.status < 400) {
+        this.loadPagedTweets(res.body);
       } else {
         this.setState({
-          done: false,
-          paging: true
+          paging: false,
+          done: true
         });
         console.log(err, 'ERRRRRR');
       }
@@ -90,8 +83,8 @@ class App extends React.Component {
     } else {
       // Set application state (Not paging, paging complete)
       this.setState({
-        done: true,
-        paging: false
+        paging: false,
+        done: true
       });
     }
   }
@@ -101,12 +94,12 @@ class App extends React.Component {
       document.documentElement.clientHeight,
       window.innerHeight || 0
     );
+
     let s = document.body.scrollTop || document.documentElement.scrollTop || 0;
     let scrolled = h + s > document.body.offsetHeight;
 
     if (scrolled && !this.state.paging && !this.state.done) {
       this.setState({ paging: true, page: this.state.page + 1 });
-
       this.getPage(this.state.page);
     }
   }
@@ -115,7 +108,7 @@ class App extends React.Component {
     this.setState({
       tweets: [],
       trackingKW: data,
-      paging: true,
+      page: 0,
       count: 0,
       skip: 0
     });
@@ -127,8 +120,6 @@ class App extends React.Component {
       if (!err) {
         this.setState({
           tweets: res.body,
-          paging: false,
-          skip: res.body.length
         });
       } else {
         console.log(err, 'error occured');
@@ -148,26 +139,27 @@ class App extends React.Component {
   componentWillUnmount() {
     window.removeEventListener('scroll', this.checkWindowScroll);
   }
+
   componentWillReceiveProps(nextProps) {
     if (
       !nextProps.tweets.length ||
-      this.state.tweets.length !== nextProps.length
+      this.state.tweets.length !== nextProps.tweets.length
     ) {
       this.setState({
         trackingKW: nextProps.trackingKW,
-        paging: true,
-        count: 0
+        skip: nextProps.skip,
       });
     }
   }
+
   render() {
     return (
       <div className="flex-container">
         <NotificationBar
           count={this.state.count}
-          showNewTweets={this.showNewTweets}
+          onShowNewTweets={this.showNewTweets}
         />
-        <h2 className="title"> Tweet Stream</h2>
+        <h2 className="title">Tweet Stream</h2>
         <Search
           topic={this.state.trackingKW}
           update={data => {
@@ -177,8 +169,8 @@ class App extends React.Component {
         <h3 className="tracking">
           {' '}{`Tracking: ${this.state.trackingKW}`}
         </h3>
+        <TweetStream tweets={this.state.tweets} />
         <Loader paging={this.state.paging} />
-        <TweetStream tweetStream={this.state.tweets} />
       </div>
     );
   }

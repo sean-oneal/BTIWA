@@ -1,29 +1,11 @@
+
 .tweet-stream-container {
-   display: -webkit-flex;
-   display: flex;
-   -webkit-flex-direction: column;
-   flex-direction: column;
-   -webkit-align-items: center;
-   align-items: center;
-   flex-flow: column nowrap;
-   justify-content: center;
-   width: 60%;
-   min-width: 60%;
+   width: 50%;
+   min-width: 50%;
 }
 
 .tweet-stream {
-  padding: 20px;
-  margin: auto;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.tweet-list-item {
-  list-style-type: none;
-  flex: 0 0 auto;
-  -webkit-flex: 1;
-  flex-grow: 1;
-  flex-basis: 0;
-  justify-content: space-between;
-  min-width: 5px;
+  align-content: center;
+  justify-content: center;
+  align-self: auto;
 }

@@ -1,65 +1,94 @@
-.tweet {
-  display: flex;
-  font-size: 12px;
+
+#user-author {
+  color: #3498db;
   font-weight: bold;
-  line-height: 16px;
+  flex: 0 1 auto;
+  padding-left: 5px;
+  align-self: auto;
+}
+
+#user-screenName {
+  font-size: 14px;
+  flex: 0 0 auto;
+  padding-left: 5px;
+  align-self: auto;
+}
+
+#user-screenName:hover {
+  color: grey;
+  font-weight: bold;
+}
+
+.tweet {
+  min-width: 250px;
+  // flex: 0 1 auto;
+  display: flex;
+  flex-flow: column;
+  -webkit-flex-flow: column;
   border-color: #eee #ddd #bbb;
   border-radius: 5px;
   border-style: solid;
   border-width: 1px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-  margin: 10px 5px;
-  padding: 10px 16px 16px 16px;
-  align-items: stretch;
-  justify-content: space-around;
-  flex-flow: column nowrap;
+   margin: 2px 2px;
+  align-content: center;
+  justify-content: center;
 }
+
 .tweet.active {
-  -webkit-transition: 1s all ease;
-       -moz-transition: 1s all ease;
-        -ms-transition: 1s all ease;
-         -o-transition: 1s all ease;
-            transition: 1s all ease;
+  -webkit-transition: 0.5s ease;
+       -moz-transition: 0.5s ease;
+        -ms-transition: 0.5s ease;
+         -o-transition: 0.5s ease;
+            transition: 0.5s ease;
 }
+
+.tweet.hidden {
+  display: none;
+}
+
 .tweet:hover {
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-.tweet-body{
-  align-items: stretch;
-  -webkit-align-items: stretch;
-  justify-content: space-between;
-  padding: 10px;
-  font-size: 16px;
-  font-weight: normal;
-  line-height: 20px;
-}
-
-.user-profile {
+.tweet-user-info {
   display: flex;
-  -webkit-flex-direction: row;
-  flex-direction: row;
-  // align-items: stretch;
-  // -webkit-align-items: stretch;
-  flex-grow: 1;
-  flex-basis: 0;
-  padding: 5px;
+  -webkit-flex-flow: row wrap;
+  flex-flow: row wrap;
+   align-self: auto;
+  padding: 10px 0 0 10px;
 }
 
 .user-image {
-  width: 50px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  align-self: auto;
+}
+
+.image {
+  width: 70px;
   border: 2px solid black;
-  flex-basis: 0;
+  border-radius: 5px;
 }
 
 .user-name {
-  color: #B3B2B2;
-  flex-grow: 1;
-  flex-basis: 0;
-  margin: 20px;
+  display: flex;
+  flex-flow: column wrap;
+  align-self: auto;
 }
 
-.user-name:hover {
-   color: inherit;
-  font-weight: bold;
+.tweet-body {
+  align-self: auto;
+  display: flex;
+  flex-flow: row wrap;
+  flex: 0 0 auto;
+  padding: 0 0 20px 20px;
+  align-self: auto;
+  // align-content: flex-start;
+  // justify-content: space-around;
+}
+.tweet-text {
+  flex: 0 1 auto;
+  font-size: 16px;
 }

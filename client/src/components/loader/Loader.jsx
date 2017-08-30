@@ -4,7 +4,6 @@ import './styles.scss';
 const Loader = ( { paging } ) => {
   return (
       <div className={'loader' + ( paging ? ' active' : '' )}>
-
       </div>
   );
 };

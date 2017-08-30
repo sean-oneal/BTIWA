@@ -42,6 +42,7 @@ const app = express();
 app.disable('etag');
 
 app.get('/api/tweets', routes.index);
+app.use('/#top', routes.index);
 app.get('/api/page/:page/:skip', routes.page);
 
 // app.use(bodyParser.urlencoded({ extended: false }));
@@ -55,7 +56,7 @@ server .listen(port, () => {
   console.log('\n 👻  Server is running at ==> http://localhost:%s/', port);
 });
 
-let params = {track:'Tesla', lang: 'en'};
+let params = {track:'San Francisco', lang: 'en'};
 
 const io = socketIo(server);
 
@@ -98,12 +99,3 @@ io.on('connection', socket => {
 //     res.send(token);
 //   });
 // });
-
-// app.get('/tweets', routes.index);
-// app.get('/page/:page/:skip', routes.page);
-
-
-// app.use('/#top', (req, res) => {
-//   return res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-// });
-

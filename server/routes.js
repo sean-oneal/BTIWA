@@ -14,7 +14,6 @@ const routes = {
   },
 
   page: (req, res) => {
-    console.log('requst received', req);
     Tweet.getTweets(req.params.page, req.params.skip, tweets => {
       res.send(tweets);
     });

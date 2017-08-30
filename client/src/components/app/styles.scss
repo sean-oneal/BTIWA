@@ -1,10 +1,16 @@
+
 .flex-container {
-  margin: 100px 0 0 0;
+  margin: 80px 0 0 0;
+
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column;
-  flex-direction: column;
-  -webkit-align-items: center;
+
+  -webkit-flex-flow: column wrap;
+  flex-flow: column wrap;
+  align-content: center;
   align-items: center;
 }
 

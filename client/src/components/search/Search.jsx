@@ -25,12 +25,16 @@ class Search extends React.Component {
 
   render() {
     return (
-      <div className="field">
-        <div className="search">
-          <input type="text" placeholder="Search keyword" value={this.state.text}
+      <div className="searchBox">
+        <div className="field field-is-search">
+          <input
+            className="searchBox-query"
+            type="text"
+            placeholder="Enter #Hashtag"
+            value={this.state.text}
             onChange={event => this.onInput(event.target.value)}
-            />
-          <button className="search-btn" onClick={event => { this.onSubmit(event); }}>{'Search'}</button>
+          />
+          <button className="btn searchBox-btn" onClick={event => { this.onSubmit(event); }}>{'Search'}</button>
         </div>
       </div>
     );
