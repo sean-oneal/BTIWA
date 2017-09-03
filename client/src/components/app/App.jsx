@@ -155,20 +155,17 @@ class App extends React.Component {
   render() {
     return (
       <div className="flex-container">
+        <h2 className="title">Tweet Stream</h2>
         <NotificationBar
           count={this.state.count}
           onShowNewTweets={this.showNewTweets}
         />
-        <h2 className="title">Tweet Stream</h2>
         <Search
-          topic={this.state.trackingKW}
+          trackingKW={this.state.trackingKW}
           update={data => {
             this.updateHashTag(data);
           }}
         />
-        <h3 className="tracking">
-          {' '}{`Tracking: ${this.state.trackingKW}`}
-        </h3>
         <TweetStream tweets={this.state.tweets} />
         <Loader paging={this.state.paging} />
       </div>
@@ -177,3 +174,7 @@ class App extends React.Component {
 }
 
 export default App;
+
+// <h3 className="tracking">
+//   {' '}{`Tracking: ${this.state.trackingKW}`}
+// </h3>

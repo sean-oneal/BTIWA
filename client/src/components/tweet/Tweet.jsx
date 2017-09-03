@@ -3,16 +3,17 @@ import './styles.scss';
 
 const Tweet = ({active, body, author, profileImg, screenName}) => (
   <li className={'tweet' + (active ? ' active' : ' hidden')}>
-    <div className="tweet-user-info">
-      <div className="user-image">
+    <div className="tweet-row">
+      <div className="tweet-col">
         <img className="image" alt={author} src={profileImg} />
       </div>
-      <div className="user-name">
+      <div className="tweet-col">
         <p id="user-author">{author}</p>
         <p id="user-screenName">{`@${screenName}`}</p>
       </div>
+
     </div>
-    <div className="tweet-body">
+    <div className="tweet-row">
       <p className="tweet-text">{body}</p>
     </div>
   </li>

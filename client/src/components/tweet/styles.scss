@@ -2,37 +2,28 @@
 #user-author {
   color: #3498db;
   font-weight: bold;
-  flex: 0 1 auto;
   padding-left: 5px;
-  align-self: auto;
 }
 
-#user-screenName {
-  font-size: 14px;
-  flex: 0 0 auto;
+#user-screenName{
+  font-size: 15px;
   padding-left: 5px;
-  align-self: auto;
+  color: gray;
 }
 
 #user-screenName:hover {
-  color: grey;
+  color: #3498db;
   font-weight: bold;
 }
 
 .tweet {
-  min-width: 250px;
-  // flex: 0 1 auto;
-  display: flex;
-  flex-flow: column;
-  -webkit-flex-flow: column;
+  padding: 5px;
   border-color: #eee #ddd #bbb;
+  margin-left: 5px;
   border-radius: 5px;
   border-style: solid;
   border-width: 1px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
-   margin: 2px 2px;
-  align-content: center;
-  justify-content: center;
 }
 
 .tweet.active {
@@ -51,19 +42,22 @@
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 
-.tweet-user-info {
+.tweet-row {
   display: flex;
   -webkit-flex-flow: row wrap;
   flex-flow: row wrap;
-   align-self: auto;
-  padding: 10px 0 0 10px;
+  align-items: center;
 }
 
-.user-image {
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  align-self: auto;
+.tweet-col {
+    display: flex;
+    flex-flow: column wrap;
+    -webkit-flex-flow: column wrap;
+     align-items: center;
+}
+
+div.tweet-col {
+  align-items: flex-start;
 }
 
 .image {
@@ -72,23 +66,6 @@
   border-radius: 5px;
 }
 
-.user-name {
-  display: flex;
-  flex-flow: column wrap;
-  align-self: auto;
-}
-
-.tweet-body {
-  align-self: auto;
-  display: flex;
-  flex-flow: row wrap;
-  flex: 0 0 auto;
-  padding: 0 0 20px 20px;
-  align-self: auto;
-  // align-content: flex-start;
-  // justify-content: space-around;
-}
 .tweet-text {
-  flex: 0 1 auto;
-  font-size: 16px;
+  font-size: 17px;
 }

@@ -5,20 +5,20 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: '',
+      newHashtag: '',
     };
   }
 
   onInput(data) {
     this.setState({
-      text: data
+      newHashtag: data
     });
   }
 
   onSubmit(event) {
-    this.props.update(this.state.text);
+    this.props.update(this.state.newHashtag);
     this.setState({
-      text: ''
+      newHashtag: ''
     });
     event.preventDefault();
   }
@@ -26,12 +26,14 @@ class Search extends React.Component {
   render() {
     return (
       <div className="searchBox">
+        <h3 className="tracking">
+          { `Monitoring   #${this.props.trackingKW} `}</h3>
         <div className="field field-is-search">
           <input
             className="searchBox-query"
             type="text"
-            placeholder="Enter #Hashtag"
-            value={this.state.text}
+            placeholder="Enter #Hashtag To Monitor"
+            value={this.state.newHashtag}
             onChange={event => this.onInput(event.target.value)}
           />
           <button className="btn searchBox-btn" onClick={event => { this.onSubmit(event); }}>{'Search'}</button>

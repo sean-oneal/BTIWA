@@ -1,11 +1,15 @@
 
-.tweet-stream-container {
-   width: 50%;
-   min-width: 50%;
-}
-
 .tweet-stream {
-  align-content: center;
-  justify-content: center;
-  align-self: auto;
+  // flex: 1 1 auto;
+  // display: -webkit-box;
+  //     display: -moz-box;
+  //     display: -ms-flexbox;
+  //     display: -webkit-flex;
+  //     display: flex;
+
+  //     -webkit-flex-flow: column nowrap;
+  //     flex-flow: column nowrap;
+  // align-items: center;
+  // justify-content: space-between;
+  // align-content: space-between ;
 }
